@@ -58,8 +58,14 @@ class ViewController: UIViewController {
         if indexValue <= 12 {
         questionLabel.text = allQuestions.list[indexValue].questionText
         } else {
-            print("End of test.")
-            indexValue = 0
+            
+            let alert = UIAlertController(title: "Text Complete", message: "Would you like to restart the test?", preferredStyle: .alert)
+            let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (UIAlertAction) in
+                self.startOver()
+            })
+            
+            alert.addAction(restartAction)
+            present(alert, animated: true, completion: nil)
         }
         
     }
@@ -80,7 +86,8 @@ class ViewController: UIViewController {
     
     func startOver() {
         
-        
+        indexValue = 0
+        nextQuestion()
        
     }
     
