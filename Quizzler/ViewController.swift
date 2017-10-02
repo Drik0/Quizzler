@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     let allQuestions = QuestionBank()
     var pickedAnswer = true
+    var indexValue = 0
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let firstQuestion = allQuestions.list[0]
+        let firstQuestion = allQuestions.list[indexValue]
         questionLabel.text = firstQuestion.questionText
         
     }
@@ -37,33 +38,49 @@ class ViewController: UIViewController {
         }
         
         checkAnswer()
+        indexValue = indexValue + 1
+        nextQuestion()
+        print(indexValue)
+        
+        }
+        
   
-    }
     
     
     func updateUI() {
-      
+
     }
     
 
     func nextQuestion() {
+        
+        
+        if indexValue <= 12 {
+        questionLabel.text = allQuestions.list[indexValue].questionText
+        } else {
+            print("End of test.")
+            indexValue = 0
+        }
         
     }
     
     
     func checkAnswer() {
         
-     let correctAnswer = allQuestions.list[0].answer
+        let correctAnswer = allQuestions.list[indexValue].answer
         if correctAnswer == pickedAnswer {
-            print("That's the correct answer.")
+            print("Yay ^^")
         } else {
-            print("Wrong answer!!")
+            print("BOO!!!")
         }
+        
         
     }
     
     
     func startOver() {
+        
+        
        
     }
     
