@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     let allQuestions = QuestionBank()
     var pickedAnswer = true
     var indexValue = 0
+    var score: Int = 0
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
         
         let firstQuestion = allQuestions.list[indexValue]
         questionLabel.text = firstQuestion.questionText
+        updateUI()
         
     }
     
@@ -48,15 +50,19 @@ class ViewController: UIViewController {
     
     
     func updateUI() {
+        
+        scoreLabel.text = "Score \(score)"
+        progressLabel.text = "\(indexValue + 1) / 13"
 
     }
     
 
     func nextQuestion() {
         
-        
         if indexValue <= 12 {
         questionLabel.text = allQuestions.list[indexValue].questionText
+        updateUI()
+            
         } else {
             
             let alert = UIAlertController(title: "Text Complete", message: "Would you like to restart the test?", preferredStyle: .alert)
@@ -75,6 +81,7 @@ class ViewController: UIViewController {
         
         let correctAnswer = allQuestions.list[indexValue].answer
         if correctAnswer == pickedAnswer {
+            score = score + 50
             print("Yay ^^")
         } else {
             print("BOO!!!")
@@ -87,6 +94,7 @@ class ViewController: UIViewController {
     func startOver() {
         
         indexValue = 0
+        score = 0
         nextQuestion()
        
     }
