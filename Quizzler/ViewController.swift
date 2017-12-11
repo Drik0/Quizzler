@@ -35,8 +35,10 @@ class ViewController: UIViewController {
         
         if sender.tag == 1 {
             pickedAnswer = true
+            ProgressHUD.showSuccess("Correct!")
         } else if sender.tag == 2 {
             pickedAnswer = false
+            ProgressHUD.showError("Incorrect.")
         }
         
         checkAnswer()
